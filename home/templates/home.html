@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What people think about this ... in this subreddit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body style="background-color: #FF5700;">
+    <div>
+        <div style="display: flex; justify-content: center; align-items: center; height: 200px; ">
+            <div style="width: 1020px; display: flex; justify-content: center; align-items: center;">
+                <span style="font-size: 50px; color: white;">What is their opinion about this person?</span>
+            </div>
+            
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100px;">
+            <div style="width: 1020px;">
+                <form action="" method="get">
+                    <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; margin-top: 25px;">
+                        <input style="border: 2px solid black; border-radius: 10px;" type="text" placeholder="Write a name..." name="name">
+                        <input style="border: 2px solid black; border-radius: 10px;" type="text" placeholder="Write a subreddit..." name="subreddit">
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 25px;">
+                        <button type="submit" class="btn btn-dark">Find</button>
+                    </div>
+                </form>
+                <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 10px;">
+                    <p style="font-size: 10px; color: white;">(Please note that searching in a popular subreddit may take some time)</p>
+                </div>
+            </div>
+            
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+            <div style="display: flex; justify-content: center; align-items: center; width: 70%; height: auto; border: 3px solid black; border-radius: 5px; margin-bottom: 20px; background-color: white;">
+                <div style="display: flex; flex-direction: column; width: 100%;">
+                    {% if sentiment %}
+                        {% if sentiment == -1 %}
+                            <div style="display: flex; justify-content: center;align-items: center; margin: 0px; flex: auto; padding: 100px;">
+                                <p style="font-size: 15px; color: black;">Please put the name of a person</p>
+                            </div>
+                        {% elif sentiment == -2 %}
+                            <div style="display: flex; justify-content: center;align-items: center; margin: 0px; flex: auto; padding: 100px;">
+                                <p style="font-size: 15px; color: black;">Subreddit does not exist</p>
+                            </div>
+                        {% elif sentiment == -3 %}
+                            <div style="display: flex; justify-content: center;align-items: center; margin: 0px; flex: auto; padding: 100px;">
+                                <p style="font-size: 15px; color: black;">Not enough data</p>
+                            </div>
+                        {% else %}
+                            {% if sentiment == 1 %}
+                                <div style="display: flex; justify-content: center;align-items: center; margin-bottom: 10px; margin-top: 30px;">
+                                    <p style="font-size: 25px; color: red; font-weight: bold;">Very negative</p>
+                                </div>
+                            {% elif sentiment == 2 %}
+                                <div style="display: flex; justify-content: center;align-items: center; margin-bottom: 10px; margin-top: 30px;">
+                                    <p style="font-size: 25px; color: #ff4d4d; font-weight: bold;">Negative</p>
+                                </div>
+                            {% elif sentiment == 3 %}
+                                <div style="display: flex; justify-content: center;align-items: center; margin-bottom: 10px; margin-top: 30px;">
+                                    <p style="font-size: 25px; color: rgb(236, 230, 47); font-weight: bold;">Neutral</p>
+                                </div>
+                            {% elif sentiment == 4 %}
+                                <div style="display: flex; justify-content: center;align-items: center; margin-bottom: 10px; margin-top: 30px;">
+                                    <p style="font-size: 25px; color: #70db70; font-weight: bold;">Positive</p>
+                                </div>
+                            {% elif sentiment == 5 %}
+                                <div style="display: flex; justify-content: center;align-items: center; margin-bottom: 10px; margin-top: 30px;">
+                                    <p style="font-size: 30px; color: green; font-weight: bold;">Very positive</p>
+                                </div>
+                            {% endif %}
+                        
+                            {% if not examples.empty %}
+                                <p style="font-size: 20px; color: black; margin-bottom: 10px; margin-left: 5px;">Some examples:</p>
+                                {% for example in examples %}
+                                    <div style="margin-bottom: 10px; margin-left: 5px; margin-right: 5px; padding: 5px; border: 1px solid black; border-radius: 10px;">
+                                        {{ example }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <div style="display: flex; justify-content: center;align-items: center; margin: 0px; flex: auto; padding: 100px;">
+                            <p style="font-size: 30px; color: black;">Welcome!</p>
+                        </div>
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+</body>
+</html>
