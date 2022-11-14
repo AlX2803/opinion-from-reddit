@@ -1,6 +1,6 @@
 # Summary of the project
  
- I developed an application that finds the average opinion of people in a subreddit about a person with Reddit’s API in Python. I used:
+ I developed an application that finds the average opinion in a subreddit about a person with Reddit’s API in Python. I used:
  - Python Reddit API Wrapper(PRAW) to get comments from Reddit’s API
  - Bidirectional Encoder Representations from Transformers (BERT), a transformer-based machine learning technique for natural language processing pre-training, to perform sentiment analysis on the comments
  - spaCy, an open-source software library for advanced natural language processing, to verify if the first input that the user gives is the name of a person
